@@ -20,7 +20,7 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
 
   try {
     // Debugging: Log the token to see its format
-    console.log('Received token:', token);
+    //console.log('Received token:', token);
 
     // Verify the token and extract the user
     jwt.verify(token, secretKey, (err, user) => {
