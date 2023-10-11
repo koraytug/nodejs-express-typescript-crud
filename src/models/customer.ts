@@ -1,5 +1,5 @@
 // src/models/customer.ts
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document } from "mongoose";
 
 export interface ICustomer extends Document {
   name: string;
@@ -13,4 +13,4 @@ const CustomerSchema: Schema = new Schema({
   phoneNumber: { type: String, required: true },
 });
 
-export default mongoose.model<ICustomer>('Customer', CustomerSchema);
+export default mongoose.model<ICustomer>("Customer", CustomerSchema);

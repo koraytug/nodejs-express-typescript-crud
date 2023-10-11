@@ -1,6 +1,5 @@
-// src/controllers/customer.ts
-import { Request, Response } from 'express';
-import Customer, { ICustomer } from '../models/customer';
+import { Request, Response } from "express";
+import Customer, { ICustomer } from "../models/customer";
 
 export const createCustomer = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -11,7 +10,7 @@ export const createCustomer = async (req: Request, res: Response): Promise<void>
 
     res.status(201).json(newCustomer);
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -20,7 +19,7 @@ export const getCustomers = async (req: Request, res: Response): Promise<void> =
     const customers = await Customer.find();
     res.status(200).json(customers);
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -28,12 +27,12 @@ export const getCustomerById = async (req: Request, res: Response): Promise<void
   try {
     const customer = await Customer.findById(req.params.id);
     if (!customer) {
-      res.status(404).json({ message: 'Customer not found' });
+      res.status(404).json({ message: "Customer not found" });
       return;
     }
     res.status(200).json(customer);
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -43,17 +42,17 @@ export const updateCustomer = async (req: Request, res: Response): Promise<void>
     const updatedCustomer = await Customer.findByIdAndUpdate(
       req.params.id,
       { name, email, phoneNumber },
-      { new: true }
+      { new: true },
     );
 
     if (!updatedCustomer) {
-      res.status(404).json({ message: 'Customer not found' });
+      res.status(404).json({ message: "Customer not found" });
       return;
     }
 
     res.status(200).json(updatedCustomer);
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -62,12 +61,12 @@ export const deleteCustomer = async (req: Request, res: Response): Promise<void>
     const deletedCustomer = await Customer.findByIdAndDelete(req.params.id);
 
     if (!deletedCustomer) {
-      res.status(404).json({ message: 'Customer not found' });
+      res.status(404).json({ message: "Customer not found" });
       return;
     }
 
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 };

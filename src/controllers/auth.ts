@@ -1,11 +1,11 @@
 // src/controllers/authRoutes.ts
-import { Request, Response } from 'express';
-import User from '../models/user';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import 'dotenv/config';
+import { Request, Response } from "express";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import User from "../models/user";
+import "dotenv/config";
 
-const secretKey = process.env.SCRETKEY||"";
+const secretKey = process.env.SCRETKEY || "";
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -13,21 +13,21 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      res.status(401).json({ message: 'Authentication failed' });
+      res.status(401).json({ message: "Authentication failed" });
       return;
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      res.status(401).json({ message: 'Authentication failed' });
+      res.status(401).json({ message: "Authentication failed" });
       return;
     }
 
-    const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: "1h" });
 
     res.status(200).json({ token });
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
